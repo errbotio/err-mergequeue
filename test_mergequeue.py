@@ -1,14 +1,18 @@
 from typing import List
-import importlib
 from mergequeue import MergeQueue, MergeQueueException
 from pr import PR, PRTransition
 from stats import NoStats
 import github_wrapper
 import pytest
+import sys
+try:
+    import datadog
+except ImportError:
+    pass
 
 
 class FakeGHUser:
-    def __init__(self, login:str='gbinet-argo'):
+    def __init__(self, login: str='gbinet-argo'):
         self.login = login
 
 
@@ -344,6 +348,7 @@ def test_check_queue_depth():
     assert len(transitions) == 1
     assert len(mq.pulled_prs) == 1
 
+
 def test_set_stats_plugin():
     """Test setting stats plugin"""
     repo = FakeGHRepo()
@@ -351,7 +356,12 @@ def test_set_stats_plugin():
 
     assert type(mq.stats) == NoStats
 
-    DataDogStats = getattr(importlib.import_module('datadog_stats'), 'Stats')
 
-    mq.stats = DataDogStats(api_key="fdjkfdjkjkfd")
-    assert type(mq.stats) == DataDogStats
+@pytest.mark.skipif('datadog' not in sys.modules, reason='requires datadog')
+def test_datadog_bindings():
+    repo = FakeGHRepo()
+    mq = MergeQueue(repo)
+    from datadog_stats import Stats
+
+    mq.stats = Stats(api_key="fdjkfdjkjkfd")
+    assert type(mq.stats) == Stats
