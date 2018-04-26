@@ -1,0 +1,8 @@
+[Core]
+Name = Merge
+Module = main
+DependsOn = Help, GHStatus
+
+[Documentation]
+Description = A merge bot for GitHub Pull Requests.
+
