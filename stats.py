@@ -1,8 +1,3 @@
-# THIS PROGRAM IS CONFIDENTIAL AND PROPRIETARY TO ARGO AI, LLC ("ARGO"),
-# AND MAY NOT BE COPIED, REPRODUCED, MODIFIED, OR DISTRIBUTED WITHOUT
-# ARGO'S PERMISSION.
-# Copyright (c) 2018 Argo AI, LLC.
-
 """Library for defining common stat collecting features"""
 from abc import ABC, abstractmethod
 from pr import PR
