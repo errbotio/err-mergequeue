@@ -14,7 +14,7 @@ class MergeQueueException(Exception):
 
 class MergeQueue:
     def __init__(self,
-                 gh_repo, 
+                 gh_repo,
                  max_pulled_prs: int = MAX_PULLED_PR,
                  initial_queue: List[PR] = None,
                  stats: BaseStat=None,
@@ -208,7 +208,7 @@ class MergeQueue:
             else:
                 # forward the state
                 new_pr.blessed = old_pr.blessed
-                new_pr.start_time = old_pr.start_time
+                new_pr.start_time = old_pr.start_time if hasattr(old_pr, 'start_time') else PR.generate_start_time()
                 if new_pr.mergeable_state == 'unknown':
                     # Keep the last known state: if it comes back
                     # to the same state we don't spam the chat.
