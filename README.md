@@ -17,7 +17,7 @@ This is a chat based Github merge queue plugin for Errbot.
 4. Still talking to Errbot privately as a bot administrator, set the github key with:
 
 ```
-!plugin config Summit {'github-token': 'cafecafecafecafecafecafecafecafecafecafe'}
+!plugin config Merge {'github-token': 'cafecafecafecafecafecafecafecafecafecafe'}
 ```
 
 5. Issuing `!help` should give you a new set of commands related to mergequeue.
