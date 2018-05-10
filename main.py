@@ -137,9 +137,9 @@ class Summit(BotPlugin):
                     room = self.build_identifier(room_name)
                     merge_queue = self.queues[room_name]
                     for pr, new_states in merge_queue.check():
-                        if not new_states:
+                        public_info = [PR_MSG[state].format(params) for state, params in new_states if state in PUBLIC_STATE_FEEDBACK]
+                        if not public_info:
                             continue
-                        public_info = (PR_MSG[state].format(params) for state, params in new_states if state in PUBLIC_STATE_FEEDBACK)
                         public_msg = f'[#{pr.nb}]({pr.url}) {", ".join(public_info)}.'
                         self.send(room, public_msg)
                         if pr.user in usr_rev_map:
@@ -512,3 +512,4 @@ class Summit(BotPlugin):
                 return f'The {plugin} does not have a Stats class implemented'
             except Exception as e:
                 return f'Unknown error {e}, while loading {plugin}'
+
