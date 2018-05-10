@@ -96,7 +96,11 @@ class Summit(BotPlugin):
         self.gh = Github(self.config['github-token'], api_preview=True)
         self.queues = {}  # Those are MergeQueues
         self.rooms_lock = RLock()
-        self.gh_status = self.get_plugin('GHStatus')
+        try:
+            self.gh_status = self.get_plugin('GHStatus')
+        except:
+            self.log.info("If you want notifications to your chat users on PRs you can install the companion plugin err-ghstatus.")
+            self.gh_status = None
 
         # Reload the state from the storage.
         with self.mutable(ROOMS) as rooms:
@@ -129,8 +133,7 @@ class Summit(BotPlugin):
         """
         Check the state of all PRs in all configured rooms.
         """
-
-        usr_rev_map = {v: k for k, v in self.gh_status[self.gh_status.USERS].items()}
+        usr_rev_map = {v: k for k, v in self.gh_status[self.gh_status.USERS].items()} if self.gh_status else {}
         with self.rooms_lock:
             with self.mutable(ROOMS) as rooms:
                 for room_name, repo in rooms.items():
