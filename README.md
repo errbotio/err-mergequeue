@@ -1,5 +1,5 @@
 [![CI Status](https://img.shields.io/travis/argoai/err-mergequeue/master.svg)](https://travis-ci.org/argoai/err-mergequeue/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-Apachev2-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a chat based Github merge queue plugin for Errbot.
 
