@@ -9,7 +9,7 @@ This is a chat based Github merge queue plugin for Errbot.
 
 2. Talking to Errbot privately as a bot administrator, install the plugin repo for mergequeue.
 ```
-!repos install https://github.com/argoai/err-mergequeue
+!repos install https://github.com/errbotio/err-mergequeue
 ```
 
 3. Create a github API key for example create a user for the bot and generate a [personal token](https://github.com/settings/tokens).
